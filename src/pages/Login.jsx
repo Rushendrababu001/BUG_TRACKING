@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import AuthFormLayout from "../components/AuthFormLayout";
+import AuthFormLayout from "../Components/AuthFormLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Button from "../Components/Button";
