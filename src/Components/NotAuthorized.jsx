@@ -2,7 +2,7 @@ import React from 'react'
 
 const NotAuthorized = () => {
   return (
-    <h1>NotAuthorized</h1>
+    <h1>Not Authorized</h1>
   )
 }
 

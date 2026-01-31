@@ -5,6 +5,10 @@ import { auth, db } from "../firebaseConfig";
 import AuthFormLayout from "../components/AuthFormLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Button from "../Components/Button";
+
+const inputClasses =
+  "w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm focus:border-indigo-300 focus:bg-white focus:outline-none";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -50,107 +54,103 @@ export default function Register() {
   };
 
   return (
-    <AuthFormLayout title="Create an Account">
+    <AuthFormLayout title="Create an account">
       <form onSubmit={handleRegister} className="space-y-5">
-        
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+        <div className="space-y-1.5">
+          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
             Username
           </label>
           <input
             type="text"
-            className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+            className={inputClasses}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            placeholder="Enter your name"
+            placeholder="Ali Rahman"
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+        <div className="space-y-1.5">
+          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
             Email
           </label>
           <input
             type="email"
-            className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
+            className={inputClasses}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            placeholder="Enter a valid email"
+            placeholder="team@ocupite.com"
           />
         </div>
 
-        <div style={{ position: "relative" }}>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+        <div className="space-y-1.5">
+          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
             Password
           </label>
-
-          <input
-            type={showPassword ? "text" : "password"}
-            className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="••••••••"
-          />
-
-          <span
-            onClick={() => setShowPassword(!showPassword)}
-            style={{
-              position: "absolute",
-              right: "10px",
-              top: "70%",
-              transform: "translateY(-50%)",
-              cursor: "pointer"
-            }}
-          >
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              className={inputClasses}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="••••••••"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute inset-y-0 right-3 flex items-center text-slate-400"
+              aria-label="Toggle password visibility"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
         </div>
 
-        <div style={{ position: "relative" }}>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Retype Password
+        <div className="space-y-1.5">
+          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+            Retype password
           </label>
-
-          <input
-            type={showConfirmPassword ? "text" : "password"}
-            className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-            placeholder="••••••••"
-          />
-
-          <span
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            style={{
-              position: "absolute",
-              right: "10px",
-              top: "70%",
-              transform: "translateY(-50%)",
-              cursor: "pointer"
-            }}
-          >
-            {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
+          <div className="relative">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              className={inputClasses}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              placeholder="••••••••"
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword((prev) => !prev)}
+              className="absolute inset-y-0 right-3 flex items-center text-slate-400"
+              aria-label="Toggle confirm password visibility"
+            >
+              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
         </div>
 
-        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+        {error && (
+          <p className="text-xs text-rose-500 bg-rose-50 border border-rose-100 rounded-2xl px-3 py-2">
+            {error}
+          </p>
+        )}
 
-        <button
+        <Button
           type="submit"
-          disabled={loading}
-          className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg transition"
+          loading={loading}
+          loadingText="Creating account..."
+          className="w-full justify-center"
         >
-          {loading ? "Creating Account..." : "Sign Up"}
-        </button>
+          Sign up
+        </Button>
       </form>
 
-      <p className="mt-4 text-center text-gray-600">
+      <p className="mt-6 text-center text-sm text-slate-500">
         Already have an account?{" "}
-        <Link to="/login" className="text-indigo-600 hover:underline">
+        <Link to="/login" className="text-indigo-600 font-semibold hover:underline">
           Login
         </Link>
       </p>
